@@ -102,17 +102,17 @@ def qualitysavefile(file1,file2,output):
     return 'done'
 
 if __name__ == "__main__":
-    file1 = "/scratch/test_shahzaib/MicheleB24/15_square8ts1_tomo_60t60_p5d_1s_mb1_Export.st"
-    file2 = "/scratch/test_shahzaib/MicheleB24/15_square8ts1_tomo_60t60_p5d_1s_mb1_Export.ali"
-    output = "/scratch/test_shahzaib/casestudies/NE6E100.hdf5"
-    #qualitysavefile(file1, file2, output)
+    file1 = "/scratch/Shahzaib/test.mrc"
+    file2 = "/scratch/Shahzaib/test.ali"
+    output = "/scratch/Shahzaib/test.hdf5"
+    qualitysavefile(file2, file2, output)
     
-    q1, s1, sfft1, q2, s2, sfft2 = imagequality(file1, file2)
-    s1grad = np.gradient(s1, axis=2)
-    s2grad = np.gradient(s2, axis=2)
-    import scipy.stats
-    print scipy.stats.iqr(s1grad)
-    print scipy.stats.iqr(s2grad)
+    #q1, s1, sfft1, q2, s2, sfft2 = imagequality(file1, file2)
+    #s1grad = np.gradient(s1, axis=2)
+    #s2grad = np.gradient(s2, axis=2)
+    #import scipy.stats
+    #print scipy.stats.iqr(s1grad)
+    #print scipy.stats.iqr(s2grad)
     #dnp.plot.line(s1grad, name="sino1grad")
     #dnp.plot.line(s2grad, name="sino2grad")
     """
