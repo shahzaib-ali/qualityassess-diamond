@@ -11,6 +11,7 @@ import xdesign
 import copy
 import random
 from datetime import datetime
+import matplotlib.pyplot as plt
 
 startTime = datetime.now()
 
@@ -79,6 +80,11 @@ for x in range(0,21):
     intense.append(average)
 print intense
 #dnp.plot.addline(x=range(0,10), y=intense, title='Intensity against magnitude of misalignment', name='fft_misalign')
-dnp.plot.line(dnp.array(intense),title = 'Intensity of vertical line against misalignment magnitude', name = 'fft_misalign')
-
+#dnp.plot.line(dnp.array(intense),title = 'Intensity of vertical line against misalignment magnitude', name = 'fft_misalign')
+plt.figure(1)
+plt.plot(intense)
+plt.xlabel('Magnitude of misalignment')
+plt.ylabel('Quality Value')
+plt.title('Quality against misalignment magnitude')
 print datetime.now() - startTime
+plt.show()
