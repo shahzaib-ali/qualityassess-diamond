@@ -1,6 +1,8 @@
 #Create Phantom
 import numpy as np
 import xdesign
+import copy
+import random
  
 circle_phantom = xdesign.Phantom(geometry=xdesign.Circle(xdesign.Point([0.6,0.5]),radius=0.1))
 circle_phantom.mass_atten = 3.0
@@ -13,15 +15,20 @@ import matplotlib.pyplot as plt
 #Create Sinogram
 sx = 200
 sy = 400
-sino_circle, prb = xdesign.sinogram(sx, sy, circle_phantom, noise = 0.0)
+sino_circle, prb = xdesign.sinogram(sx, sy, circle_phantom, noise = 0.5)
 sino_circle = np.reshape(sino_circle, (sx, sy))
 
 #Add misalignment
-sino_circle[sy/4,:] = np.roll(sino_circle[sy/4,:], sy/20)
+misalign = 5
+sino1 = copy.deepcopy(sino_circle)
+y = set(range(-misalign,misalign+1))
+for k in range(sx):
+    ds = random.sample(y, 1)
+    sino1[k,:] = np.roll(sino1[k,:], ds)
 
 #Create full wave
-zeros = np.zeros(sino_circle.shape)
-x = np.concatenate((zeros,sino_circle),axis=0)
+zeros = np.zeros(sino1.shape)
+x = np.concatenate((zeros,sino1),axis=0)
 sino_circle_full = x + np.flipud(x)
 
 plt.figure(1)
@@ -42,5 +49,5 @@ sino_circle_fft_plot[sino_circle_fft_plot>1] = 1
 two = plt.imshow(sino_circle_fft_plot)
 two.set_cmap(color)
 
-plt.savefig('/scratch/U_ytp88384/pictures/basicmisalign.png', dpi=300)
+plt.savefig('/scratch/U_ytp88384/pictures/misalignfullnoise.png', dpi=300)
 plt.show()

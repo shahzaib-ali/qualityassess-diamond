@@ -34,8 +34,8 @@ one = plt.imshow(circle)
 one.set_cmap(color)
 
 #Create Sinogram
-sx = 200
-sy = 200
+sx = 400
+sy = 400
 sino_circle, prb = xdesign.sinogram(sx, sy, head)
 sino_circle = np.reshape(sino_circle, (sx, sy))
  
@@ -68,8 +68,8 @@ l = sino_circle_full_fft_plot.shape[0]
 four = plt.imshow(sino_circle_full_fft_plot[int(l*0.25):int(l*0.75),:])
 four.set_cmap(color)
 
+print datetime.now() - startTime
 #plt.figure(2)
 #plt.hist(sino_circle_full_fft)
+plt.savefig('/scratch/Shahzaib/basicexample.jpg', dpi=300)
 plt.show()
-
-print datetime.now() - startTime
