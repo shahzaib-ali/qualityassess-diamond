@@ -71,5 +71,5 @@ four.set_cmap(color)
 print datetime.now() - startTime
 #plt.figure(2)
 #plt.hist(sino_circle_full_fft)
-plt.savefig('/scratch/Shahzaib/basicexample.jpg', dpi=300)
+#plt.savefig('/scratch/Shahzaib/basicexample.jpg', dpi=300)
 plt.show()
