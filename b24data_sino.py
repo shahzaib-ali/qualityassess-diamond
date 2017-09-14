@@ -28,26 +28,5 @@ def fft_plot(fiename, name):
     return raw_fft
 #fft_raw = fft_plot("/scratch/test_shahzaib/MicheleB24/15_square8ts1_tomo_60t60_p5d_1s_mb1_Export.st", "raw")
 #fft_align = fft_plot("/scratch/test_shahzaib/MicheleB24/15_square8ts1_tomo_60t60_p5d_1s_mb1_Export.ali", "align")
-fft_raw = fft_plot("/scratch/test_shahzaib/MicheleB24/83_square7ts3_tomo_60t60_p5d_1s_mb1_Export.st", "raw")
-fft_align = fft_plot("/scratch/test_shahzaib/MicheleB24/83_square7ts3_tomo_60t60_p5d_1s_mb1_Export.ali", "align")
-
-import quality
-
-print fft_raw.shape
-print quality.fft_quality(fft_raw)
-print quality.fft_quality(fft_align) 
-"""
-raw_file = mrc.open("/scratch/test_shahzaib/MicheleB24/15_square8ts1_tomo_60t60_p5d_1s_mb1_Export.st")
-data = np.array(raw_file.data)
-print data.shape
-raw_sino = data[:,457:460:1,:].mean(1)
-
-
-dnp.plot.image(raw_sino, name="raw_sino")
-raw_fft = np.abs(fft.fftshift(fft.fft2(raw_sino)))
-dnp.plot.image(raw_fft, name="raw_fft")
-raw_file.close()
-
-
-dnp.plot.image(data[100,:,:], name="raw_tilt")
-"""
+fft_raw = fft_plot("/scratch/shahzaib/data.mrc", "raw")
+#fft_align = fft_plot("/scratch/test_shahzaib/MicheleB24/83_square7ts3_tomo_60t60_p5d_1s_mb1_Export.ali", "align")

@@ -46,8 +46,8 @@ def quality(data):
 def fft_array_quality(fftarray):
     angle = fftarray.shape[0]
     angle11 = int(angle*0.3)
-    angle12 = int(angle*0.4)
-    angle21 = int(angle*0.6)
+    angle12 = int(angle*0.35)
+    angle21 = int(angle*0.65)
     angle22 = int(angle*0.7)
     x = fftarray.shape[1]
     x1 = int(x*0.45)
@@ -66,7 +66,7 @@ def fft_quality(sino_fft):
 
 def picksino(image):
     yrange = image.shape[1]
-    gap = int(yrange/100)
+    gap = int(yrange/200)
     #sinos = image[:,::gap,:]
     sinos = (image[:,:-2:gap,:]+image[:,1:-1:gap,:]+image[:,2::gap,:])/3.0
     #sinos = (image[:,:-3:gap,:]+image[:,1:-2:gap,:]+image[:,2:-1:gap,:]+image[:,3::gap,:])/4.0
@@ -102,29 +102,18 @@ def qualitysavefile(file1,file2,output):
     return 'done'
 
 if __name__ == "__main__":
-    file1 = "/scratch/Shahzaib/test.mrc"
-    file2 = "/scratch/Shahzaib/test.ali"
-    output = "/scratch/Shahzaib/test.hdf5"
-    qualitysavefile(file2, file2, output)
-    
-    #q1, s1, sfft1, q2, s2, sfft2 = imagequality(file1, file2)
-    #s1grad = np.gradient(s1, axis=2)
-    #s2grad = np.gradient(s2, axis=2)
-    #import scipy.stats
-    #print scipy.stats.iqr(s1grad)
-    #print scipy.stats.iqr(s2grad)
-    #dnp.plot.line(s1grad, name="sino1grad")
-    #dnp.plot.line(s2grad, name="sino2grad")
-    """
-    #file1 = "/scratch/test_shahzaib/cryomarkerauto/cryo.st"
-    #file2 = "/scratch/test_shahzaib/cryomarkerauto/cryo_fin.mrc"
+    file1 = "/scratch/shahzaib/B24data/2017_0207_Trypanosoma_33/33_tomo_A6_cell_3b_60t60_1s_mb1_Export.st"
+    file2 = "/scratch/shahzaib/B24data/2017_0207_Trypanosoma_33/33_tomo_A6_cell_3b_60t60_1s_mb1_Export.ali"
+    output = "/scratch/shahzaib/casestudies/cryomarkerauto.hdf5"
+    qualitysavefile(file1, file2, output)
     
     q1, s1, sfft1, q2, s2, sfft2 = imagequality(file1, file2)
-    dnp.plot.line(dnp.array(q2)-dnp.array(q1), name="diff")
-    #dnp.plot.line(dnp.array(q2), name="aligned")08_A1S2T1_65t70_p5_1s_mb1_Export
-    #print np.mean(dnp.array(q2)-dnp.array(q1))
-    #print np.std(dnp.array(q2)-dnp.array(q1))
-    #dnp.plot.image(s1[:,70,:], name="sinoraw")
-    #dnp.plot.image(s2[:,70,:], name="sinoalign")
-    """
+    s1grad = np.gradient(s1, axis=2)
+    s2grad = np.gradient(s2, axis=2)
+
+    
+    print np.percentile(s1grad, 90) - np.percentile(s1grad, 10)
+    print np.percentile(s2grad, 90) - np.percentile(s2grad, 10)
+    print np.mean(dnp.array(q2)-dnp.array(q1))
+    print np.std(dnp.array(q2)-dnp.array(q1))
     print datetime.now() - startTime
